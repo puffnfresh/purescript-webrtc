@@ -17,7 +17,8 @@
     "output"
   ],
   "dependencies": {
-    "purescript-aff": "~1.0.0",
-    "purescript-unsafe-coerce": "~1.0.0"
+    "purescript-aff": "^1.0.0",
+    "purescript-unsafe-coerce": "^1.0.0",
+    "purescript-nullable": "^1.0.1"
   }
 }
