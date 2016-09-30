@@ -22,13 +22,13 @@ module WebRTC.RTC (
 , onmessageChannel
 ) where
 
-import Prelude (Unit(), unit)
-import Control.Monad.Aff (Aff(), makeAff)
-import Control.Monad.Eff (Eff())
-import Control.Monad.Eff.Exception (Error())
-import Data.Maybe (Maybe(..))
-
 import WebRTC.MediaStream
+import Control.Monad.Aff (Aff, makeAff)
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Exception (Error)
+import Data.Maybe (Maybe(..))
+import Data.Nullable (Nullable)
+import Prelude (Unit, unit)
 
 foreign import data RTCPeerConnection :: *
 
@@ -42,8 +42,8 @@ foreign import addStream
 
 foreign import data IceEvent :: *
 
-type RTCIceCandidate = { sdpMLineIndex :: Int
-                       , sdpMid :: String
+type RTCIceCandidate = { sdpMLineIndex :: Nullable Int
+                       , sdpMid :: Nullable String
                        , candidate :: String
                        }
 
