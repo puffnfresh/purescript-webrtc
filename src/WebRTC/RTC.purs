@@ -30,7 +30,7 @@ import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable)
 import Prelude (Unit, unit)
 
-foreign import data RTCPeerConnection :: *
+foreign import data RTCPeerConnection :: Type
 
 type Ice = { iceServers :: Array { url :: String } }
 
@@ -40,7 +40,7 @@ foreign import newRTCPeerConnection
 foreign import addStream
   :: forall e. MediaStream -> RTCPeerConnection -> Eff e Unit
 
-foreign import data IceEvent :: *
+foreign import data IceEvent :: Type
 
 type RTCIceCandidate = { sdpMLineIndex :: Nullable Int
                        , sdpMid :: Nullable String
@@ -73,7 +73,7 @@ foreign import onaddstream
                RTCPeerConnection ->
                Eff e Unit
 
-foreign import data RTCSessionDescription :: *
+foreign import data RTCSessionDescription :: Type
 
 foreign import newRTCSessionDescription
   :: { sdp :: String, "type" :: String } -> RTCSessionDescription
@@ -116,7 +116,7 @@ foreign import _setRemoteDescription
 setRemoteDescription :: forall e. RTCSessionDescription -> RTCPeerConnection -> Aff e Unit
 setRemoteDescription desc pc = makeAff (\e s -> _setRemoteDescription (s unit) e desc pc)
 
-foreign import data RTCDataChannel :: *
+foreign import data RTCDataChannel :: Type
 
 foreign import createDataChannel
   :: forall e. String ->

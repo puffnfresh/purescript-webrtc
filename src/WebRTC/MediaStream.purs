@@ -11,10 +11,10 @@ module WebRTC.MediaStream (
 import Prelude (Unit())
 import Unsafe.Coerce (unsafeCoerce)
 import Control.Monad.Aff (Aff(), makeAff)
-import Control.Monad.Eff (Eff())
+import Control.Monad.Eff (Eff(), kind Effect)
 import Control.Monad.Eff.Exception (Error())
 
-foreign import data MediaStream :: *
+foreign import data MediaStream :: Type
 
 foreign import _getUserMedia
   :: forall e. (MediaStream -> Eff e Unit) ->
@@ -22,7 +22,7 @@ foreign import _getUserMedia
                MediaStreamConstraints ->
                Eff e Unit
 
-foreign import data USER_MEDIA :: !
+foreign import data USER_MEDIA :: Effect
 
 getUserMedia :: forall e. MediaStreamConstraints -> Aff (userMedia :: USER_MEDIA | e) MediaStream
 getUserMedia c = makeAff (\e s -> _getUserMedia s e c)
@@ -32,7 +32,7 @@ newtype MediaStreamConstraints =
                          , audio :: Boolean
                          }
 
-foreign import data Blob :: *
+foreign import data Blob :: Type
 
 mediaStreamToBlob :: MediaStream -> Blob
 mediaStreamToBlob = unsafeCoerce
